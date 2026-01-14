@@ -18,6 +18,12 @@ resource "azurerm_container_app_environment" "this" {
     maximum_count         = 0
     minimum_count         = 0
   }
+
+  lifecycle {
+    ignore_changes = [
+      log_analytics_workspace_id //Ignoring this paramater until the following bug has been fixed: https://github.com/hashicorp/terraform-provider-azurerm/issues/30306
+    ]
+  }
 }
 
 resource "time_sleep" "delay_after_container_app_environment_creation" {
